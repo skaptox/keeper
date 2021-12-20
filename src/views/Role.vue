@@ -1,13 +1,15 @@
 <template>
   <div class="about">
     <router-link to="/">Go back</router-link>
-    <h1>This is an role page</h1>
 
     <div class="columns is-mobile is-centered">
       <div class="column is-half">
+        <h1 class="title is-size-5">
+          {{ mode === "create" ? "Create" : "Update" }} Role
+        </h1>
         <form @submit="onSubmit">
           <b-field label="Name">
-            <b-input v-model="name"></b-input>
+            <b-input required v-model="name"></b-input>
           </b-field>
 
           <b-field label="Type">
@@ -17,8 +19,9 @@
             </b-select>
           </b-field>
 
-          <b-field label="description">
+          <b-field label="Description">
             <b-input
+              required
               maxlength="200"
               v-model="description"
               type="textarea"
@@ -27,11 +30,11 @@
 
           <b-field grouped>
             <b-field label="Editable">
-              <b-switch v-model="editable"> </b-switch>
+              <b-switch type="is-black" v-model="editable"> </b-switch>
             </b-field>
 
             <b-field label="Active">
-              <b-switch v-model="active"> </b-switch>
+              <b-switch type="is-black" v-model="active"> </b-switch>
             </b-field>
           </b-field>
           <b-button
@@ -89,9 +92,9 @@ interface Data {
   data(): Data {
     return {
       mode: Mode.Create,
-      name: "Oscar",
+      name: "",
       type: Type.Admin,
-      description: "Albornoz",
+      description: "",
       editable: true,
       active: false,
       loading: false,

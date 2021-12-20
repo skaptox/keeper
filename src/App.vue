@@ -10,4 +10,11 @@
 </template>
 
 <style lang="scss">
+a {
+  color: #3fb8c7;
+}
+
+.button.is-primary {
+  background-color: #3fb8c7 !important;
+}
 </style>

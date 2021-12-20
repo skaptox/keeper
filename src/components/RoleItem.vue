@@ -10,6 +10,8 @@
         <span class="is-size-7 description-text">
           {{ role.description }}
         </span>
+
+        <UserList :users="role.users" />
       </div>
     </div>
     <footer class="card-footer">
@@ -18,15 +20,17 @@
       </p>
 
       <div class="card-footer-item is-justify-content-flex-end">
-        <b-button v-if="!role.editable" type="is-primary" disabled>
-          <b-icon icon="account-plus" size="is-small" />
+        <b-button v-if="!role.editable" disabled>
+          <b-icon icon="lock" size="is-small" />
         </b-button>
 
         <div v-else class="buttons">
-          <b-button type="is-text">
-            <router-link :to="{ name: 'Role', params: { id: role.id } }">
-              Edit
-            </router-link>
+          <b-button
+            type="is-light"
+            tag="router-link"
+            :to="{ name: 'Role', params: { id: role.id } }"
+          >
+            Edit
           </b-button>
           <b-button type="is-danger" outlined @click="onDeleteRole(role.id)">
             Delete
@@ -41,8 +45,12 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Role } from "@/models";
 import { Call } from "vuex-pathify";
+import UserList from "./UserList.vue";
 
 @Component({
+  components: {
+    UserList,
+  },
   methods: {
     parseDate: function (date: string) {
       return new Date(date).toLocaleDateString().slice(0, 10);
@@ -61,8 +69,8 @@ export default class RoleItem extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.card {
-  height: 270px;
+.card-content {
+  height: 250px;
 }
 
 .description-text {
