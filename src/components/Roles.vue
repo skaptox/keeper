@@ -1,14 +1,24 @@
 <template>
   <div>
-    <div v-for="role in roles" :key="role.id">{{ role.name }}</div>
+    <div class="columns is-multiline">
+      <div class="column is-4" v-for="role in roles" :key="role.id">
+        <RoleItem :role="role" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
 import { Role } from "@/models";
 
-@Component
+import RoleItem from "./RoleItem.vue";
+
+@Component({
+  components: {
+    RoleItem,
+  },
+})
 export default class Roles extends Vue {
   @Prop() private roles!: Role[];
 }
