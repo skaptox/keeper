@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <FilterRoles :search.sync="search" :status.sync="status" class="my-5" />
+    <div class="is-flex is-justify-content-space-between">
+      <FilterRoles :search.sync="search" :status.sync="status" class="my-5" />
+      <b-button>
+        <router-link :to="{ name: 'Role' }">Create New Role</router-link>
+      </b-button>
+    </div>
     <Roles :roles="filteredRoles" />
   </div>
 </template>
@@ -8,7 +13,7 @@
 <script lang="ts">
 import { Get, Call } from "vuex-pathify";
 
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Roles from "@/components/Roles.vue"; // @ is an alias to /src
 import { Role } from "@/models";
 import FilterRoles from "@/components/FilterRoles.vue";
@@ -44,6 +49,10 @@ export default class Home extends Vue {
   }
 
   get filteredRoles() {
+    console.log(
+      "hola",
+      this.roles.map((e) => e.name)
+    );
     return this.roles.filter((role) => {
       if (this.status === Status.ActiveAndInactive) {
         return role.name.toLowerCase().includes(this.search.toLowerCase());
