@@ -136,13 +136,12 @@ export default class Home extends Vue {
         });
       } else {
         this.updateRole({
-          id: parseInt(this.$route.params.id),
+          ...this.originalRole,
           name: this.name,
           type: this.type,
           description: this.description,
           editable: this.editable,
           active: this.active,
-          ...this.originalRole,
         });
       }
 
