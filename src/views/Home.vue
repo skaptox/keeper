@@ -53,10 +53,6 @@ export default class Home extends Vue {
   }
 
   get filteredRoles() {
-    console.log(
-      "hola",
-      this.roles.map((e) => e.name)
-    );
     return this.roles.filter((role) => {
       if (this.status === Status.ActiveAndInactive) {
         return role.name.toLowerCase().includes(this.search.toLowerCase());

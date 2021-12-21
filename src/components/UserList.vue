@@ -12,7 +12,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class UserList extends Vue {
-  @Prop() private users!: User[];
+  @Prop({ default: [] }) private users!: User[];
 }
 </script>
 

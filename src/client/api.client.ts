@@ -16,7 +16,6 @@ class ApiClient {
   }
 
   async deleteRole(id: number): Promise<unknown> {
-    console.log('deleteRole', id)
     return true
   }
   async updateRole(role: Role): Promise<Role> {

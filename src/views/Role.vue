@@ -9,7 +9,7 @@
         </h1>
         <form @submit="onSubmit">
           <b-field label="Name">
-            <b-input required v-model="name"></b-input>
+            <b-input required v-model="name" maxlength="20"></b-input>
           </b-field>
 
           <b-field label="Type">
@@ -103,6 +103,7 @@ interface Data {
 })
 export default class Home extends Vue {
   loading!: boolean;
+  originalRole: Role | null = null;
 
   mode!: Mode;
   name!: string;
@@ -141,6 +142,7 @@ export default class Home extends Vue {
           description: this.description,
           editable: this.editable,
           active: this.active,
+          ...this.originalRole,
         });
       }
 
@@ -159,6 +161,7 @@ export default class Home extends Vue {
       this.description = role.description;
       this.editable = role.editable;
       this.active = role.active;
+      this.originalRole = role;
     }
   }
 }
